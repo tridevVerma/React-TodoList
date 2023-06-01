@@ -4,10 +4,14 @@ import TodoList from "./TodoList";
 function App() {
   return (
     <StyledApp className="App">
-      <h1>
-        <i className="fa-solid fa-clipboard-check"></i>
-        <span>Todo List</span>
-      </h1>
+      <div className="heading">
+        <h1>
+          <i className="fa-solid fa-clipboard-check"></i>
+          <span>Todo List</span>
+        </h1>
+        <h2>Completed : (2 / 3)</h2>
+      </div>
+
       <TodoList />
     </StyledApp>
   );

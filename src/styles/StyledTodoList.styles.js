@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledTodoList = styled.div`
-  width: 40vw;
+  width: 80vw;
   height: 80vh;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
@@ -10,6 +10,14 @@ const StyledTodoList = styled.div`
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1.5rem;
+
+  @media screen and (min-width: 1024px) {
+    width: 60vw;
+  }
+
+  @media screen and (min-width: 1226px) {
+    width: 40vw;
+  }
 
   > form {
     margin-bottom: 1.5rem;
@@ -76,25 +84,61 @@ const StyledTodoList = styled.div`
       grid-gap: 1rem;
       > li {
         display: grid;
-        grid-template-columns: 1fr 30px 30px;
+        grid-template-columns: 20px 1fr 20px 20px;
         grid-gap: 1.5rem;
         align-items: center;
         background: rgba(255, 255, 255, 0.2);
         color: hsl(0, 0%, 95%);
         border-radius: 2rem;
         padding: 0.8rem 1rem;
+        text-transform: capitalize;
+        overflow: hidden;
+        cursor: pointer;
+
+        > .checked-icon {
+          font-size: 1.2rem;
+          transition: 0.25s all;
+          transform: translateX(-200%);
+        }
+
+        &:hover .checked-icon {
+          transform: translateX(0%);
+        }
+
+        > p {
+          transition: 0.25s all;
+          margin-left: -2rem;
+        }
+
+        &:hover p {
+          margin-left: -0.5rem;
+        }
+
         > button {
           background: transparent;
         }
         > .edit-todo i {
           font-size: 1rem;
-          color: hsl(120, 70%, 40%);
+          color: hsl(120, 70%, 70%);
         }
         > .delete-todo i {
           font-size: 1rem;
-          color: hsl(0, 60%, 50%);
+          color: hsl(0, 80%, 55%);
         }
       }
+    }
+  }
+
+  .completed-todo {
+    > .checked-icon {
+      font-size: 1.2rem;
+      transform: translateX(0%) !important;
+      color: hsl(120, 70%, 70%);
+    }
+
+    > p {
+      margin-left: -0.5rem !important;
+      text-decoration: line-through;
     }
   }
 `;

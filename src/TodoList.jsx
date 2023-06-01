@@ -22,6 +22,10 @@ const TodoList = () => {
     fetchTodos();
   }, []);
 
+  const handleTodoCompletion = (e) => {
+    e.currentTarget.classList.toggle("completed-todo");
+  };
+
   return (
     <StyledTodoList className="todolist-container">
       <form>
@@ -35,7 +39,8 @@ const TodoList = () => {
         <ul>
           {todosList.map((todo) => {
             return (
-              <li key={todo.id}>
+              <li key={todo.id} onClick={handleTodoCompletion}>
+                <i className="fa-solid fa-circle-check checked-icon"></i>
                 <p>{todo.title}</p>
                 <button className="edit-todo">
                   <i className="fa-solid fa-pen-to-square"></i>

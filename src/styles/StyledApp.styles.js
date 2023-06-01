@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledApp = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-image: linear-gradient(
     288deg,
     rgba(0, 85, 255, 1) 1.5%,

@@ -38,6 +38,15 @@ const addTodo = async (nextId, text) => {
 
 const updateTodo = async (todo, newText) => {
   try {
+    if (todo.id > 200) {
+      return {
+        success: true,
+        updateTodo: {
+          ...todo,
+          title: newText,
+        },
+      };
+    }
     const response = await fetch(`${API_URL}/${todo.id}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -58,6 +67,11 @@ const updateTodo = async (todo, newText) => {
 
 const deleteTodo = async (id) => {
   try {
+    if (id > 200) {
+      return {
+        success: true,
+      };
+    }
     await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
     });
@@ -68,4 +82,50 @@ const deleteTodo = async (id) => {
   }
 };
 
-export { fetchTodos, addTodo, updateTodo, deleteTodo };
+const toggleTodoCompletionStatus = async (todo) => {
+  try {
+    if (todo.id > 200) {
+      return {
+        success: true,
+        updateTodo: {
+          ...todo,
+          completed: !todo.completed,
+        },
+      };
+    }
+    const response = await fetch(`${API_URL}/${todo.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        ...todo,
+        completed: !todo.completed,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const result = await response.json();
+    return { success: true, updatedTodo: result };
+  } catch (err) {
+    console.log(err);
+    return { success: false };
+  }
+};
+
+const noOfCompletedTask = (tasksList) => {
+  let count = 0;
+  tasksList.forEach((task) => {
+    if (task.completed) {
+      count++;
+    }
+  });
+  return count;
+};
+
+export {
+  fetchTodos,
+  addTodo,
+  updateTodo,
+  deleteTodo,
+  toggleTodoCompletionStatus,
+  noOfCompletedTask,
+};

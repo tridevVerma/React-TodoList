@@ -33,6 +33,11 @@ const StyledTodoList = styled.div`
       border: 1px solid hsl(0, 0%, 95%);
       color: hsl(0, 0%, 95%);
       background: transparent;
+
+      &::placeholder {
+        color: hsl(0, 0%, 75%);
+        font-size: 0.95rem;
+      }
     }
 
     button {
@@ -82,50 +87,6 @@ const StyledTodoList = styled.div`
       display: grid;
       grid-template-columns: 1fr;
       grid-gap: 1rem;
-      > li {
-        display: grid;
-        grid-template-columns: 20px 1fr 20px 20px;
-        grid-gap: 1.5rem;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.2);
-        color: hsl(0, 0%, 95%);
-        border-radius: 2rem;
-        padding: 0.8rem 1rem;
-        text-transform: capitalize;
-        overflow: hidden;
-        cursor: pointer;
-
-        > .checked-icon {
-          font-size: 1.2rem;
-          transition: 0.25s all;
-          transform: translateX(-200%);
-        }
-
-        &:hover .checked-icon {
-          transform: translateX(0%);
-        }
-
-        > p {
-          transition: 0.25s all;
-          margin-left: -2rem;
-        }
-
-        &:hover p {
-          margin-left: -0.5rem;
-        }
-
-        > button {
-          background: transparent;
-        }
-        > .edit-todo i {
-          font-size: 1rem;
-          color: hsl(120, 70%, 70%);
-        }
-        > .delete-todo i {
-          font-size: 1rem;
-          color: hsl(0, 80%, 55%);
-        }
-      }
     }
   }
 
@@ -133,7 +94,7 @@ const StyledTodoList = styled.div`
     > .checked-icon {
       font-size: 1.2rem;
       transform: translateX(0%) !important;
-      color: hsl(120, 70%, 70%);
+      color: hsl(120, 70%, 50%);
     }
 
     > p {

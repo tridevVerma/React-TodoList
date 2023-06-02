@@ -1,8 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import StyledTodoList from "../styles/StyledTodoList.styles";
-import { fetchTodos, addTodo, updateTodo, deleteTodo } from "../utitlity";
+import {
+  fetchTodos,
+  addTodo,
+  updateTodo,
+  deleteTodo,
+  toggleTodoCompletionStatus,
+  noOfCompletedTask,
+} from "../utitlity";
 
-const TodoList = () => {
+import { Loader, Todo } from "./";
+
+const TodoList = ({ getCompletedCountOfTodos, getTotalCountOfTodos }) => {
   const [todosList, setTodosList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -13,7 +22,7 @@ const TodoList = () => {
     setLoading(true);
     const result = await fetchTodos();
     if (result.success) {
-      setTodosList(result.todos.slice(0, 5));
+      setTodosList(result.todos.slice(0, 15));
     }
 
     setLoading(false);
@@ -23,8 +32,29 @@ const TodoList = () => {
     getTodos();
   }, []);
 
+  useEffect(() => {
+    getTotalCountOfTodos(todosList.length);
+    getCompletedCountOfTodos(noOfCompletedTask(todosList));
+  }, [todosList]);
+
   const handleTodoCompletion = async (e) => {
-    e.currentTarget.classList.toggle("completed-todo");
+    const todoIndex = todosList.findIndex(
+      (todo) => todo.id === parseInt(e.currentTarget.id)
+    );
+    const todo = todosList[todoIndex];
+    const result = await toggleTodoCompletionStatus(todo);
+    if (result.success) {
+      setTodosList((currentList) => {
+        return [
+          ...currentList.slice(0, todoIndex),
+          {
+            ...currentList[todoIndex],
+            completed: result.updatedTodo.completed,
+          },
+          ...currentList.slice(todoIndex + 1),
+        ];
+      });
+    }
   };
 
   const handleFormSubmission = async (e) => {
@@ -70,6 +100,7 @@ const TodoList = () => {
 
   const handleEditTodo = (e) => {
     e.stopPropagation();
+    textInput.current.focus();
     setIsEditing(true);
     setEditableTodo(e.currentTarget.parentElement);
   };
@@ -85,45 +116,46 @@ const TodoList = () => {
     setLoading(false);
   };
 
-  if (loading) {
-    return <h1>Loading ...</h1>;
-  }
-
   return (
     <StyledTodoList className="todolist-container">
-      <form onSubmit={handleFormSubmission}>
-        <input type="text" name="todo-content" ref={textInput} required />
-        <button type="submit">
-          {isEditing ? (
-            <i className="fa-solid fa-pen-to-square"></i>
-          ) : (
-            <i className="fa-solid fa-plus"></i>
-          )}
-        </button>
-      </form>
-      <div className="todos-container">
-        <ul>
-          {todosList.map((todo) => {
-            return (
-              <li
-                key={todo.id}
-                id={todo.id}
-                className={todo.completed ? "completed-todo" : ""}
-                onClick={handleTodoCompletion}
-              >
-                <i className="fa-solid fa-circle-check checked-icon"></i>
-                <p>{todo.title}</p>
-                <button className="edit-todo" onClick={handleEditTodo}>
-                  <i className="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button className="delete-todo" onClick={handleDeleteTodo}>
-                  <i className="fa-solid fa-trash"></i>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <form onSubmit={handleFormSubmission}>
+            <input
+              type="text"
+              name="todo-content"
+              ref={textInput}
+              placeholder={isEditing ? "Edit todo ..." : "Add todo ..."}
+              required
+            />
+            <button type="submit">
+              {isEditing ? (
+                <i className="fa-solid fa-pen-to-square"></i>
+              ) : (
+                <i className="fa-solid fa-plus"></i>
+              )}
+            </button>
+          </form>
+
+          <div className="todos-container">
+            <ul>
+              {todosList.map((todo) => {
+                return (
+                  <Todo
+                    key={todo.id}
+                    todo={todo}
+                    handleTodoCompletion={handleTodoCompletion}
+                    handleEditTodo={handleEditTodo}
+                    handleDeleteTodo={handleDeleteTodo}
+                  />
+                );
+              })}
+            </ul>
+          </div>
+        </>
+      )}
     </StyledTodoList>
   );
 };

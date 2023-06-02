@@ -1,6 +1,8 @@
 import { useState } from "react";
 import StyledApp from "../styles/StyledApp.styles";
 import { TodoList } from "./";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [totalCount, setTotalCount] = useState(0);
@@ -13,6 +15,9 @@ function App() {
   const getCompletedCountOfTodos = (value) => {
     setCompletedCount(value);
   };
+
+  const notify = (type, message) => toast(message, { type });
+
   return (
     <StyledApp className="App">
       <div className="heading">
@@ -27,7 +32,9 @@ function App() {
       <TodoList
         getCompletedCountOfTodos={getCompletedCountOfTodos}
         getTotalCountOfTodos={getTotalCountOfTodos}
+        notify={notify}
       />
+      <ToastContainer autoClose={2000} />
     </StyledApp>
   );
 }

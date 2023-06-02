@@ -6,10 +6,13 @@ const fetchTodos = async () => {
       method: "GET",
     });
     const result = await response.json();
-    return { success: true, todos: result };
+    if (response.ok) {
+      return { success: true, todos: result };
+    } else {
+      throw new Error("Error while fetching todos...");
+    }
   } catch (err) {
-    console.log(err);
-    return { success: false };
+    return { success: false, message: err.message };
   }
 };
 
@@ -29,10 +32,14 @@ const addTodo = async (nextId, text) => {
     });
 
     const result = await response.json();
-    return { success: true, newTodo: result };
+
+    if (response.ok) {
+      return { success: true, newTodo: result };
+    } else {
+      throw new Error("Error while Adding todo...");
+    }
   } catch (err) {
-    console.log(err);
-    return { success: false };
+    return { success: false, message: err.message };
   }
 };
 
@@ -41,7 +48,7 @@ const updateTodo = async (todo, newText) => {
     if (todo.id > 200) {
       return {
         success: true,
-        updateTodo: {
+        updatedTodo: {
           ...todo,
           title: newText,
         },
@@ -58,10 +65,13 @@ const updateTodo = async (todo, newText) => {
       },
     });
     const result = await response.json();
-    return { success: true, updatedTodo: result };
+    if (response.ok) {
+      return { success: true, updatedTodo: result };
+    } else {
+      throw new Error("Error while updating todo...");
+    }
   } catch (err) {
-    console.log(err);
-    return { success: false };
+    return { success: false, message: err.message };
   }
 };
 
@@ -72,13 +82,17 @@ const deleteTodo = async (id) => {
         success: true,
       };
     }
-    await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
     });
-    return { success: true };
+
+    if (response.ok) {
+      return { success: true };
+    } else {
+      throw new Error("Error while deleting todo...");
+    }
   } catch (err) {
-    console.log(err);
-    return { success: false };
+    return { success: false, message: err.message };
   }
 };
 
@@ -87,7 +101,7 @@ const toggleTodoCompletionStatus = async (todo) => {
     if (todo.id > 200) {
       return {
         success: true,
-        updateTodo: {
+        updatedTodo: {
           ...todo,
           completed: !todo.completed,
         },
@@ -104,10 +118,14 @@ const toggleTodoCompletionStatus = async (todo) => {
       },
     });
     const result = await response.json();
-    return { success: true, updatedTodo: result };
+    console.log(result);
+    if (response.ok) {
+      return { success: true, updatedTodo: result };
+    } else {
+      throw new Error("Error while updating completion status...");
+    }
   } catch (err) {
-    console.log(err);
-    return { success: false };
+    return { success: false, message: err.message };
   }
 };
 

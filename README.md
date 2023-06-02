@@ -1,5 +1,58 @@
-## Simple React-Todo project with all CRUD methods build using React, Styled-Components and React-Toastify
-## [Demo Link](https://react-todolist-23.netlify.app/)
+### Simple React-Todo project with all CRUD methods build using React, Styled-Components and React-Toastify
+
+### [Demo Link](https://react-todolist-23.netlify.app/)
+
+## Getting Started
+
+- Clone this project
+- Start by installing npm if you don't have them already.
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/tridevVerma/React-TodoList.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+
+## Folder Structure
+
+```
+react-todolist/
+├── node_modules/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   ├── manifest.json
+│   ├── logo192.png
+│   ├── logo512.png
+|
+├── src/
+│   ├── components/
+│   │   ├── index.js
+│   │   ├── App.jsx
+│   │   ├── Loader.jsx
+│   │   ├── Todo.jsx
+│   │   ├── TodoList.jsx
+│   │   └── ...
+│   ├── styles/
+│   │   ├── StyledApp.styles.js
+│   │   ├── StyledLoader.styles.js
+│   │   ├── StyledTodo.styles.js
+│   │   ├── StyledTodoList.styles.js
+│   │   └── ...
+│   ├── utility.js
+│   ├── index.js
+│   ├── App.css
+│   └── index.css
+├── package.json
+├── package-lock.json
+├── README.md
+├── .gitignore
+```
 
 # Getting Started with Create React App
 

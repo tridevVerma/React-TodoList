@@ -1,5 +1,5 @@
-import StyledApp from "./styles/StyledApp.styles";
-import TodoList from "./TodoList";
+import StyledApp from "../styles/StyledApp.styles";
+import { TodoList } from "./";
 
 function App() {
   return (

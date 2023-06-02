@@ -148,6 +148,7 @@ const TodoList = ({
               name="todo-content"
               ref={textInput}
               placeholder={isEditing ? "Edit todo ..." : "Add todo ..."}
+              autoComplete="off"
               required
             />
             <button type="submit">

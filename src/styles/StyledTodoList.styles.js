@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const StyledTodoList = styled.div`
   width: 80vw;
-  height: 80vh;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -35,7 +34,7 @@ const StyledTodoList = styled.div`
       background: transparent;
 
       &::placeholder {
-        color: hsl(0, 0%, 75%);
+        color: hsl(0, 0%, 95%);
         font-size: 0.95rem;
       }
     }
@@ -52,15 +51,15 @@ const StyledTodoList = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.6);
       > i {
-        color: hsl(0, 0%, 95%);
+        color: rgb(255, 75, 43);
       }
     }
   }
 
   > .todos-container {
-    max-height: 90%;
+    max-height: 64vh;
     overflow-y: scroll;
     margin-right: -10px;
 
@@ -94,7 +93,7 @@ const StyledTodoList = styled.div`
     > .checked-icon {
       font-size: 1.2rem;
       transform: translateX(0%) !important;
-      color: hsl(120, 70%, 50%);
+      color: hsl(120, 70%, 40%);
     }
 
     > p {

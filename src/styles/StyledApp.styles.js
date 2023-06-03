@@ -3,11 +3,7 @@ import styled from "styled-components";
 const StyledApp = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(
-    288deg,
-    rgba(0, 85, 255, 1) 1.5%,
-    rgba(4, 56, 115, 1) 91.6%
-  );
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

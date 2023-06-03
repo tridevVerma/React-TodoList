@@ -1,12 +1,13 @@
 import React from "react";
-import StyledTodo from "../styles/StyledTodo.styles";
+import { StyledTodo } from "../styles";
 
 const Todo = ({
-  todo,
-  handleTodoCompletion,
-  handleEditTodo,
-  handleDeleteTodo,
+  todo, // todo-data
+  handleTodoCompletion, // function to toggle todo completion status
+  handleEditTodo, // function to toggle edit mode
+  handleDeleteTodo, // function to delete todo
 }) => {
+  // render single todo component
   return (
     <StyledTodo
       key={todo.id}

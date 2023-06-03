@@ -1,5 +1,7 @@
+// Root url for all requests
 const API_URL = `https://jsonplaceholder.typicode.com/todos`;
 
+// method to fetch initial todos
 const fetchTodos = async () => {
   try {
     const response = await fetch(API_URL, {
@@ -16,6 +18,9 @@ const fetchTodos = async () => {
   }
 };
 
+// method to add todo
+// [nextId --> id for new added todo]
+// [text --> task title]
 const addTodo = async (nextId, text) => {
   try {
     const response = await fetch(API_URL, {
@@ -43,8 +48,12 @@ const addTodo = async (nextId, text) => {
   }
 };
 
+// method to update todo
+// [todo --> todo-data]
+// [newText --> new title for todo]
 const updateTodo = async (todo, newText) => {
   try {
+    // Given server doesn't save NEW todos so can't update them
     if (todo.id > 200) {
       return {
         success: true,
@@ -75,8 +84,11 @@ const updateTodo = async (todo, newText) => {
   }
 };
 
+// method to delete todo
+// [id --> id of todo which should be deleted]
 const deleteTodo = async (id) => {
   try {
+    // Given server doesn't save NEW todos so can't delete them
     if (id > 200) {
       return {
         success: true,
@@ -96,8 +108,10 @@ const deleteTodo = async (id) => {
   }
 };
 
+// method to toggle todo completion status
 const toggleTodoCompletionStatus = async (todo) => {
   try {
+    // Given server doesn't save NEW todos so can't update completion status
     if (todo.id > 200) {
       return {
         success: true,
@@ -129,6 +143,7 @@ const toggleTodoCompletionStatus = async (todo) => {
   }
 };
 
+// method to count no of completed tasks
 const noOfCompletedTask = (tasksList) => {
   let count = 0;
   tasksList.forEach((task) => {
